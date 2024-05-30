@@ -1,0 +1,37 @@
+[gd_scene load_steps=7 format=3 uid="uid://mjvigm25nlra"]
+
+[ext_resource type="Texture2D" uid="uid://g4ft4ms2gtoj" path="res://Sprites/Asteroid.png" id="1_8fuec"]
+[ext_resource type="Script" path="res://Scenes/asteroid.gd" id="1_vtjvo"]
+[ext_resource type="PackedScene" uid="uid://b42uo5o16urew" path="res://Scenes/hurtbox.tscn" id="2_crsnd"]
+[ext_resource type="Script" path="res://Scripts/hitbox.gd" id="3_o5br5"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_m5bos"]
+radius = 56.0357
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ii10v"]
+radius = 35.0
+
+[node name="Asteroid" type="AnimatableBody2D"]
+collision_layer = 2
+script = ExtResource("1_vtjvo")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(3, 0)
+scale = Vector2(4, 4)
+texture = ExtResource("1_8fuec")
+
+[node name="Hurtbox" parent="." instance=ExtResource("2_crsnd")]
+collision_layer = 1
+collision_mask = 3
+life = 20
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+shape = SubResource("CircleShape2D_m5bos")
+debug_color = Color(0.858824, 0.0392157, 0.0666667, 0.419608)
+
+[node name="Hitbox" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_ii10v")
+script = ExtResource("3_o5br5")
+damage = 1
+
+[connection signal="hurt" from="Hurtbox" to="." method="_on_hurtbox_hurt"]
