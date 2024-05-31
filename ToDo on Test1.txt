@@ -1,1 +1,7 @@
+CR ARTE
 -separate fire on 3 animations (starting/maintaining/releasing)
+
+
+BUGS
+-cuando está herido no se hace invencible
+-las balas no pegan
