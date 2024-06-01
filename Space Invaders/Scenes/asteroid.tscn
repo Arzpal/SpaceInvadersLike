@@ -22,8 +22,8 @@ texture = ExtResource("2_r3p3v")
 
 [node name="Hurtbox" parent="." instance=ExtResource("3_7rq73")]
 collision_layer = 1
-collision_mask = 3
-life = 20
+collision_mask = 18
+life = 30
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
 shape = SubResource("CircleShape2D_m5bos")
@@ -32,6 +32,7 @@ debug_color = Color(0.858824, 0.0392157, 0.0666667, 0.419608)
 [node name="Hitbox" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_ii10v")
 script = ExtResource("4_ccpsh")
-damage = 1
+damage = 10
 
+[connection signal="death" from="Hurtbox" to="." method="_on_hurtbox_death"]
 [connection signal="hurt" from="Hurtbox" to="." method="_on_hurtbox_hurt"]

@@ -20,7 +20,6 @@ var both_pressed = false
 
 #damage
 @onready var ship_sprite = $ShipSprite
-@onready var collision_shape_2d = $Hurtbox/CollisionShape2D
 @onready var death_timer = $Hurtbox/DeathTimer
 @onready var hurtbox = $Hurtbox
 
@@ -81,10 +80,8 @@ func shoot():
 	shooting.play("Fire")
 	bullet.spawn_pos = bullet_position.global_position
 	bullet.spawn_rot = bullet_position.global_rotation
+	bullet.speed_dir = rotation_dir
 	bullet_position.add_child(bullet)
-
-func change_collision_shape_status(is_disabled):
-	collision_shape_2d.disabled = is_disabled
 
 func _on_hurt():
 	velocity.x /= 2
@@ -92,13 +89,13 @@ func _on_hurt():
 	
 	ship_sprite.play("Hurt")
 	fire.hide()
-	collision_shape_2d.disabled = true
-	hurtbox.hide()
+	hurtbox.set_deferred("monitoring", false)
 	Engine.time_scale = 0.7
 	ship_sprite.speed_scale = 1.3
 	await ship_sprite.animation_finished
 	ship_sprite.speed_scale = 1
-	collision_shape_2d.disabled = false
+	#make animation to semi vulnerability
+	hurtbox.set_deferred("monitoring", true)
 	Engine.time_scale = 1
 	fire.show()
 	ship_sprite.play("Idle")
@@ -108,7 +105,8 @@ func _on_death():
 	fire.hide()
 	Engine.time_scale = 0.5
 	ship_sprite.speed_scale = 1.5
-	collision_shape_2d.disabled = true
+	hurtbox.set_deferred("monitoring", false)
+	#collision_shape_2d.disabled = true
 	await ship_sprite.animation_finished
 	death_timer.start()
 

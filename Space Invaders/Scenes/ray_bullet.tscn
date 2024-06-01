@@ -1,62 +1,62 @@
-[gd_scene load_steps=19 format=3 uid="uid://ddytdp4yhem4k"]
+[gd_scene load_steps=19 format=3 uid="uid://0cpl2rpesd6g"]
 
-[ext_resource type="Script" path="res://Scripts/bullet.gd" id="1_bvb0b"]
-[ext_resource type="Texture2D" uid="uid://c03p4w5nr7yd1" path="res://Sprites/ShootingRay.png" id="2_tvygx"]
-[ext_resource type="Script" path="res://Scripts/hitbox.gd" id="3_cfith"]
+[ext_resource type="Script" path="res://Scripts/bullet.gd" id="1_f1dem"]
+[ext_resource type="Texture2D" uid="uid://c03p4w5nr7yd1" path="res://Sprites/ShootingRay.png" id="2_rlix6"]
+[ext_resource type="Script" path="res://Scripts/hitbox.gd" id="3_80p1k"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_awadj"]
-atlas = ExtResource("2_tvygx")
+atlas = ExtResource("2_rlix6")
 region = Rect2(192, 64, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_4nfp0"]
-atlas = ExtResource("2_tvygx")
+atlas = ExtResource("2_rlix6")
 region = Rect2(256, 64, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_cgi6p"]
-atlas = ExtResource("2_tvygx")
+atlas = ExtResource("2_rlix6")
 region = Rect2(0, 128, 64, 64)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_7sfsw"]
-atlas = ExtResource("2_tvygx")
-region = Rect2(128, 128, 64, 64)
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_p5a1q"]
-atlas = ExtResource("2_tvygx")
+atlas = ExtResource("2_rlix6")
 region = Rect2(64, 128, 64, 64)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_7sfsw"]
+atlas = ExtResource("2_rlix6")
+region = Rect2(128, 128, 64, 64)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_thdd6"]
-atlas = ExtResource("2_tvygx")
+atlas = ExtResource("2_rlix6")
 region = Rect2(192, 128, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_fqfxo"]
-atlas = ExtResource("2_tvygx")
+atlas = ExtResource("2_rlix6")
 region = Rect2(256, 128, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ca68h"]
-atlas = ExtResource("2_tvygx")
+atlas = ExtResource("2_rlix6")
 region = Rect2(0, 192, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ojtv0"]
-atlas = ExtResource("2_tvygx")
+atlas = ExtResource("2_rlix6")
 region = Rect2(64, 192, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_hiwcd"]
-atlas = ExtResource("2_tvygx")
+atlas = ExtResource("2_rlix6")
 region = Rect2(256, 0, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_85c2y"]
-atlas = ExtResource("2_tvygx")
+atlas = ExtResource("2_rlix6")
 region = Rect2(0, 64, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_rcx1g"]
-atlas = ExtResource("2_tvygx")
+atlas = ExtResource("2_rlix6")
 region = Rect2(64, 64, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_75hra"]
-atlas = ExtResource("2_tvygx")
+atlas = ExtResource("2_rlix6")
 region = Rect2(128, 64, 64, 64)
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_o2uts"]
+[sub_resource type="SpriteFrames" id="SpriteFrames_0boc4"]
 animations = [{
 "frames": [{
 "duration": 1.0,
@@ -69,10 +69,13 @@ animations = [{
 "texture": SubResource("AtlasTexture_cgi6p")
 }, {
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_p5a1q")
+}, {
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_7sfsw")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_p5a1q")
+"texture": SubResource("AtlasTexture_thdd6")
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_thdd6")
@@ -81,7 +84,16 @@ animations = [{
 "texture": SubResource("AtlasTexture_fqfxo")
 }, {
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_fqfxo")
+}, {
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_ca68h")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ca68h")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ojtv0")
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_ojtv0")
@@ -91,7 +103,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"Explosion",
-"speed": 27.0
+"speed": 36.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -111,28 +123,33 @@ animations = [{
 "speed": 18.0
 }]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_2xc6d"]
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_i2x7p"]
 radius = 5.0
 height = 28.0
 
-[node name="Bullet" type="Area2D"]
+[node name="bullet" type="RigidBody2D"]
 top_level = true
 z_index = 9
-collision_layer = 3
-collision_mask = 3
-script = ExtResource("1_bvb0b")
+collision_layer = 16
+collision_mask = 0
+gravity_scale = 0.0
+script = ExtResource("1_f1dem")
+speed_variable = 12
+timer_delay = 0.75
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 scale = Vector2(2, 2)
-sprite_frames = SubResource("SpriteFrames_o2uts")
+sprite_frames = SubResource("SpriteFrames_0boc4")
 animation = &"Idle"
 autoplay = "Idle"
-frame = 2
-frame_progress = 0.886005
 
 [node name="Hitbox" type="CollisionShape2D" parent="."]
-shape = SubResource("CapsuleShape2D_2xc6d")
-script = ExtResource("3_cfith")
+shape = SubResource("CapsuleShape2D_i2x7p")
+script = ExtResource("3_80p1k")
 damage = 10
 
-[connection signal="impact" from="Hitbox" to="." method="_on_hitbox_impact"]
+[node name="Timer" type="Timer" parent="."]
+one_shot = true
+
+[connection signal="impact" from="Hitbox" to="." method="on_hitbox_impact"]
+[connection signal="timeout" from="Timer" to="." method="on_hitbox_impact"]

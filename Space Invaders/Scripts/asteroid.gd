@@ -12,4 +12,7 @@ func _process(delta):
 
 
 func _on_hurtbox_hurt():
+	pass
+
+func _on_hurtbox_death():
 	queue_free()
