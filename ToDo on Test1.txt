@@ -1,6 +1,10 @@
 CR ARTE
 -separate fire on 3 animations (starting/maintaining/releasing)
 
+Design
+-dodging things by targeting(rotating) as puzzle
+-black holes that moves you
+-objects that you need to shoot at to unlock things
 
 BUGS
 -cuando está herido no se hace invencible

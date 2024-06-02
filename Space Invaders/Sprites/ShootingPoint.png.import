@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cg0bnt11er676"
-path="res://.godot/imported/Explosion1.png-0893852bbd0842580fc675244b1a1ef5.ctex"
+uid="uid://ctqtx5anykylr"
+path="res://.godot/imported/ShootingPoint.png-dae5b4b9662855d3a37d1959ccb18f13.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/Explosion1.png"
-dest_files=["res://.godot/imported/Explosion1.png-0893852bbd0842580fc675244b1a1ef5.ctex"]
+source_file="res://Sprites/ShootingPoint.png"
+dest_files=["res://.godot/imported/ShootingPoint.png-dae5b4b9662855d3a37d1959ccb18f13.ctex"]
 
 [params]
 

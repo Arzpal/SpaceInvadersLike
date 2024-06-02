@@ -1,10 +1,30 @@
-[gd_scene load_steps=5 format=3 uid="uid://bwk4r214tyx65"]
+[gd_scene load_steps=10 format=3 uid="uid://bwk4r214tyx65"]
 
 [ext_resource type="PackedScene" uid="uid://cs54gtqjl7w04" path="res://Scenes/player.tscn" id="1_4yvs0"]
 [ext_resource type="Texture2D" uid="uid://cado1ylq3ul5t" path="res://Sprites/Arcade - Space Invaders - Game Graphics and Color Overlays.png" id="2_wk4bu"]
 [ext_resource type="PackedScene" uid="uid://d36cb0xrguemc" path="res://Scenes/asteroid.tscn" id="3_4xnrm"]
+[ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_2d.gd" id="4_q0a8p"]
+[ext_resource type="Script" path="res://addons/phantom_camera/scripts/resources/tween_resource.gd" id="5_afprp"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ixi4c"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_gp4oy"]
+blend_mode = 2
+
+[sub_resource type="Environment" id="Environment_ac6h1"]
+background_mode = 3
+glow_enabled = true
+glow_normalized = true
+glow_intensity = 5.55
+glow_strength = 1.09
+glow_blend_mode = 1
+glow_hdr_scale = 0.19
+
+[sub_resource type="Resource" id="Resource_arocw"]
+script = ExtResource("5_afprp")
+duration = 1.0
+transition = 0
+ease = 2
 
 [node name="Playground" type="Node"]
 
@@ -28,4 +48,17 @@ texture = ExtResource("2_wk4bu")
 position = Vector2(798, 539)
 
 [node name="Asteroid2" parent="." instance=ExtResource("3_4xnrm")]
-position = Vector2(828, 385)
+position = Vector2(831, 498)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+material = SubResource("CanvasItemMaterial_gp4oy")
+position = Vector2(-1555, 239)
+scale = Vector2(53.5369, 61.9258)
+texture = ExtResource("2_wk4bu")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_ac6h1")
+
+[node name="PhantomCamera2D" type="Node2D" parent="."]
+script = ExtResource("4_q0a8p")
+tween_resource = SubResource("Resource_arocw")

@@ -2,7 +2,7 @@ extends RigidBody2D
 
 const SPEED_DELTA = 10000.0
 @export var speed_variable = 5
-var speed_dir: Vector2
+var speed_dir: float
 
 var spawn_pos: Vector2
 var spawn_rot: float
@@ -28,15 +28,13 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	var speed = SPEED_DELTA * delta * speed_variable
-	var speed_normalized_dir = Vector2(sign(speed_dir.x), sign(speed_dir.y)).normalized()
+	var speed_normalized_dir = Vector2(cos(speed_dir), sin(speed_dir))
 	var speed_movement = Vector2(speed_normalized_dir.x * speed, speed_normalized_dir.y * speed)
 	set_axis_velocity(speed_movement)
 
 func on_hitbox_impact():
-	print("TIMEOUT")
 	hitbox.set_deferred("disabled", true)
-	speed_dir.x = 0
-	speed_dir.y = 0
+	speed_variable = 0
 	linear_velocity = Vector2(0,0)
 	animated_sprite_2d.play("Explosion")
 	await animated_sprite_2d.animation_finished
