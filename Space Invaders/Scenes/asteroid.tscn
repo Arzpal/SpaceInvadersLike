@@ -6,18 +6,17 @@
 [ext_resource type="Script" path="res://Scripts/hitbox.gd" id="4_ccpsh"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_m5bos"]
-radius = 56.0357
+radius = 14.1421
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ii10v"]
-radius = 35.0
+radius = 8.544
 
 [node name="Asteroid" type="AnimatableBody2D"]
 collision_layer = 2
 script = ExtResource("1_b7ikq")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(3, 0)
-scale = Vector2(4, 4)
+position = Vector2(0.5, 0)
 texture = ExtResource("2_r3p3v")
 
 [node name="Hurtbox" parent="." instance=ExtResource("3_7rq73")]

@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://bjm625h77kh2s"]
+
+[ext_resource type="Script" path="res://Scripts/camera_movement.gd" id="1_cwnvh"]
+[ext_resource type="Texture2D" uid="uid://bc58chdg2c13j" path="res://icon.svg" id="2_jx67r"]
+
+[node name="camera_movement" type="CharacterBody2D"]
+script = ExtResource("1_cwnvh")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("2_jx67r")

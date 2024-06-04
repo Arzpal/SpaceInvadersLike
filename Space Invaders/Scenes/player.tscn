@@ -291,56 +291,60 @@ animations = [{
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_7bsch"]
-radius = 20.0
-height = 76.0
+radius = 5.0
+height = 20.0
 
 [node name="Player" type="CharacterBody2D"]
 z_index = 10
 script = ExtResource("1_yhjnc")
+moving_speed = 5.0
 delay_time = 0.1
 bullet_scene = ExtResource("2_xrqw0")
 
 [node name="Fire" type="AnimatedSprite2D" parent="."]
-self_modulate = Color(1.5, 1.5, 1.5, 1)
 use_parent_material = true
-position = Vector2(0, -24)
-scale = Vector2(4, 4)
+position = Vector2(0, -6)
 sprite_frames = SubResource("SpriteFrames_iqx7u")
 animation = &"Fire"
 autoplay = "Idle"
+frame = 1
+frame_progress = 0.174368
 
-[node name="BulletPosition" type="Node2D" parent="."]
-position = Vector2(0, -66.2)
+[node name="BulletPosition1" type="Node2D" parent="."]
+position = Vector2(-9.5, -2)
+
+[node name="BulletPosition2" type="Node2D" parent="."]
+position = Vector2(9.5, -2)
 
 [node name="ShipSprite" type="AnimatedSprite2D" parent="."]
-self_modulate = Color(1.1, 1.1, 1.35, 1)
 use_parent_material = true
-position = Vector2(0, -24)
-scale = Vector2(4, 4)
+position = Vector2(0, -6)
 sprite_frames = SubResource("SpriteFrames_b5brv")
 animation = &"Idle"
 autoplay = "Idle"
 
 [node name="Shooting" type="AnimatedSprite2D" parent="."]
+visible = false
 self_modulate = Color(2, 2, 2, 1)
-position = Vector2(0, -88)
-scale = Vector2(4, 4)
+position = Vector2(0, -29)
 sprite_frames = SubResource("SpriteFrames_1jlni")
-animation = &"Idle"
+animation = &"Fire"
 autoplay = "Idle"
+frame = 5
+frame_progress = 1.0
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
-visible = false
-position = Vector2(0, -15.2)
-polygon = PackedVector2Array(0, -54, 55, 52, -55, 52)
+position = Vector2(0, -5)
+polygon = PackedVector2Array(0, -12.5, 14, 14, -14, 14)
 
 [node name="Hurtbox" parent="." instance=ExtResource("7_hf7ov")]
-visible = false
+position = Vector2(0, 1)
 collision_layer = 1
 collision_mask = 3
 life = 100
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+position = Vector2(0, -1)
 shape = SubResource("CapsuleShape2D_7bsch")
 debug_color = Color(0, 0.6, 0.701961, 0.627451)
 

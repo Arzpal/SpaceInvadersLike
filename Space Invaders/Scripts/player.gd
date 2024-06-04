@@ -1,11 +1,12 @@
 extends CharacterBody2D
 
 #movement
-const MAX_SPEED = 50000.0
+const MAX_SPEED = 20000.0
 const DELTA_SPEED = 100
 var is_moving = false
 @export var moving_speed = 10.0
 @onready var fire = $Fire
+var direction: Vector2
 
 #rotation
 var rot_dir: Vector2 = Vector2.ZERO
@@ -16,7 +17,8 @@ var both_pressed = false
 
 #shoot
 @export var bullet_scene: PackedScene
-@onready var bullet_position = $BulletPosition
+@onready var bullet_position1 = $BulletPosition1
+@onready var bullet_position2 = $BulletPosition2
 @onready var shooting = $Shooting
 var is_targeting = false
 
@@ -39,7 +41,7 @@ func _physics_process(delta):
 		shoot()
 
 func movement_rotation(delta):
-	var direction = Vector2(
+	direction = Vector2(
 		Input.get_axis("m_left", "m_right"),
 		Input.get_axis("m_up", "m_down"))
 	
@@ -47,14 +49,25 @@ func movement_rotation(delta):
 	if abs(direction.x) == 1 && abs(direction.y) == 1:
 		both_pressed = true
 	
+	direction = direction.normalized()
+	
 	#executing movement if new direction and if not targeting
 	if direction != Vector2.ZERO && !is_targeting:
+		var extra_dir: Vector2
+		if sign(direction.x) != sign(velocity.x): extra_dir.x = direction.x * 3
+		if sign(direction.y) != sign(velocity.y): extra_dir.y = direction.y * 3
 		velocity += last_direction * moving_speed * DELTA_SPEED * delta
 		is_moving = true
 		if !fire.is_playing():
 			fire.play("Fire")
+		#reducing previous movement on an axis the player is not moving anymore
+		if direction.x == 0:
+			velocity.x = lerp(velocity.x, 0.0, delta * 2)
+		elif direction.y == 0:
+			velocity.y = lerp(velocity.y, 0.0, delta * 2)
+	
 	#reducing if not new direction
-	else:
+	elif direction == Vector2.ZERO:
 		velocity -= velocity * delta * 1.25
 		is_moving = false
 		if abs(velocity.x) < 3 : velocity.x = 0
@@ -63,7 +76,8 @@ func movement_rotation(delta):
 		fire.stop()
 	
 	#verify that doesnt go beyond MAX_SPEED
-	velocity = Vector2(clamp(velocity.x, -MAX_SPEED * delta, MAX_SPEED * delta), clamp(velocity.y, -MAX_SPEED * delta, MAX_SPEED * delta))
+	velocity = Vector2(clamp(velocity.x, -MAX_SPEED * delta, MAX_SPEED * delta)
+		, clamp(velocity.y, -MAX_SPEED * delta, MAX_SPEED * delta))
 	
 	#if one of them has been released
 	if both_pressed && direction.x * direction.y == 0 && abs(direction.x) + abs(direction.y) != 0: 
@@ -103,16 +117,21 @@ func on_shooting_rotation():
 func shoot():
 	is_targeting = false
 	
-	var bullet = bullet_scene.instantiate()
+	var bullet1 = bullet_scene.instantiate()
+	var bullet2 = bullet_scene.instantiate() 
 	
 	if shooting.is_playing(): shooting.stop()
 	shooting.play("Fire")
 	
-	bullet.spawn_pos = bullet_position.global_position
-	bullet.spawn_rot = bullet_position.global_rotation
+	assign_bullet_properties(bullet1, bullet_position1)
+	assign_bullet_properties(bullet2, bullet_position2)
+
+func assign_bullet_properties(bullet, bullet_pos):
+	bullet.spawn_pos = bullet_pos.global_position
+	bullet.spawn_rot = bullet_pos.global_rotation
 	bullet.speed_dir = global_rotation - PI / 2
 	
-	bullet_position.add_child(bullet)
+	bullet_pos.add_child(bullet)
 
 func _on_hurt():
 	velocity.x /= 2

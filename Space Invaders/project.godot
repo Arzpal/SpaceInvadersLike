@@ -11,9 +11,14 @@ config_version=5
 [application]
 
 config/name="Space Invaders"
-run/main_scene="res://Scenes/Playground.tscn"
+run/main_scene="res://Scenes/playground.tscn"
 config/features=PackedStringArray("4.2", "Forward Plus")
 config/icon="res://icon.svg"
+
+[display]
+
+window/stretch/mode="viewport"
+window/stretch/aspect="keep_height"
 
 [editor_plugins]
 
