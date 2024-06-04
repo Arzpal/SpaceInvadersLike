@@ -30,12 +30,7 @@ func _physics_process(delta):
 	
 	#if it wants to change into opposite direction
 	if player.last_direction.x > 0 && player.position.x > position.x || player.last_direction.x < 0 && player.position.x < position.x:
-		print("SI OCURRE")
 		to_player.x = lerp(global_position.x, player.global_position.x, delta * 3)
-	else:
-		print("playerdir : ", player.last_direction.x)
-		print("playerpos : ", player.position.x)
-		print("pos : ", position.x)
 	#same with vertical logic
 	if player.last_direction.y < 0 && player.position.y > position.y || player.last_direction.y > 0 && player.position.y < position.y:
 		to_player.y = lerp(global_position.y, player.global_position.y, delta * 3)
