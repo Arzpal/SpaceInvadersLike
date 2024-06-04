@@ -1,5 +1,6 @@
 CR ARTE
 -separate fire on 3 animations (starting/maintaining/releasing)
+- new shooting animation for the lasers
 
 Design
 -dodging things by targeting(rotating) as puzzle
