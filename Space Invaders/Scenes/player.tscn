@@ -297,7 +297,7 @@ height = 20.0
 [node name="Player" type="CharacterBody2D"]
 z_index = 10
 script = ExtResource("1_yhjnc")
-moving_speed = 5.0
+moving_speed = 7.0
 delay_time = 0.1
 bullet_scene = ExtResource("2_xrqw0")
 
@@ -354,6 +354,9 @@ one_shot = true
 
 [node name="RotationDelay" type="Timer" parent="."]
 one_shot = true
+
+[node name="Marker2D" type="Marker2D" parent="."]
+position = Vector2(0, -280)
 
 [connection signal="death" from="Hurtbox" to="." method="_on_death"]
 [connection signal="hurt" from="Hurtbox" to="." method="_on_hurt"]

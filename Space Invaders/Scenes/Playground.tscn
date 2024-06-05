@@ -5,8 +5,8 @@
 [ext_resource type="Script" path="res://addons/phantom_camera/scripts/resources/tween_resource.gd" id="2_oharn"]
 [ext_resource type="PackedScene" uid="uid://cs54gtqjl7w04" path="res://Scenes/player.tscn" id="3_5jjnk"]
 [ext_resource type="Texture2D" uid="uid://cado1ylq3ul5t" path="res://Sprites/Arcade - Space Invaders - Game Graphics and Color Overlays.png" id="4_ov63s"]
-[ext_resource type="PackedScene" uid="uid://bjm625h77kh2s" path="res://Scenes/camera_movement.tscn" id="4_y2dhs"]
 [ext_resource type="PackedScene" uid="uid://d36cb0xrguemc" path="res://Scenes/asteroid.tscn" id="5_cnk4v"]
+[ext_resource type="PackedScene" uid="uid://dqo5edyq4rl20" path="res://Scenes/player_pointer.tscn" id="5_jlnt7"]
 [ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="6_q84kf"]
 
 [sub_resource type="Resource" id="Resource_i0hde"]
@@ -36,13 +36,12 @@ position = Vector2(1127, -195)
 scale = Vector2(31.4618, 31.6859)
 texture = ExtResource("1_s84s1")
 
-[node name="PhantomCamera2D" type="Node2D" parent="." node_paths=PackedStringArray("follow_target", "follow_targets")]
-position = Vector2(784, 443)
+[node name="PhantomCamera2D" type="Node2D" parent="." node_paths=PackedStringArray("follow_targets")]
+position = Vector2(392, 221.5)
 script = ExtResource("1_2swdw")
 priority = 5
 follow_mode = 3
-follow_target = NodePath("../Player/camera_movement")
-follow_targets = [NodePath("../Player"), NodePath("../Player/camera_movement")]
+follow_targets = [NodePath("../Player"), NodePath("../Player/player_pointer")]
 zoom = Vector2(2, 2)
 frame_preview = false
 tween_resource = SubResource("Resource_i0hde")
@@ -50,13 +49,14 @@ tween_on_load = false
 follow_damping_value = Vector2(0.025, 0.025)
 auto_zoom_max = 1.5
 auto_zoom_margin = Vector4(40, 40, 40, 40)
+draw_limits = true
 
 [node name="Player" parent="." instance=ExtResource("3_5jjnk")]
 position = Vector2(784, 443)
+moving_speed = 10.0
+delay_time = 0.2
 
-[node name="camera_movement" parent="Player" node_paths=PackedStringArray("player") instance=ExtResource("4_y2dhs")]
-top_level = true
-position = Vector2(784, 443)
+[node name="player_pointer" parent="Player" node_paths=PackedStringArray("player") instance=ExtResource("5_jlnt7")]
 player = NodePath("..")
 
 [node name="Wall" type="StaticBody2D" parent="."]
@@ -96,7 +96,7 @@ texture = ExtResource("4_ov63s")
 environment = SubResource("Environment_le8y8")
 
 [node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(784, 443)
+position = Vector2(392, 221.5)
 zoom = Vector2(2, 2)
 
 [node name="PhantomCameraHost" type="Node" parent="Camera2D"]

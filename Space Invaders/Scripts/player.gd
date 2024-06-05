@@ -1,7 +1,7 @@
 extends CharacterBody2D
 
 #movement
-const MAX_SPEED = 20000.0
+const MAX_SPEED = 25000.0
 const DELTA_SPEED = 100
 var is_moving = false
 @export var moving_speed = 10.0
