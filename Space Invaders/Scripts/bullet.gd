@@ -10,14 +10,21 @@ var spawn_rot: float
 var dead = false
 
 @export var timer_delay = 0.0
-@onready var timer = $Timer
+var timer: Timer
+var hitbox: CollisionShape2D
 
-@onready var hitbox = $Hitbox
-
-@onready var animated_sprite_2d = $AnimatedSprite2D
+var animated_sprite_2d: AnimatedSprite2D
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	
+	animated_sprite_2d = get_node("AnimatedSprite2D")
+	timer = get_node("Timer")
+	hitbox = get_node("Hitbox")
+	
+	timer.timeout.connect(on_hitbox_impact)
+	hitbox.impact.connect(on_hitbox_impact)
+	
 	global_position = spawn_pos
 	global_rotation = spawn_rot
 	timer.wait_time = timer_delay

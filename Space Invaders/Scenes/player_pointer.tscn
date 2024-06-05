@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=3 uid="uid://dqo5edyq4rl20"]
+
+[ext_resource type="Script" path="res://Scripts/player_pointer.gd" id="1_ejjh6"]
+
+[node name="player_pointer" type="Node2D"]
+top_level = true
+script = ExtResource("1_ejjh6")
+
+[node name="PointingTimer" type="Timer" parent="."]
+wait_time = 0.5
+one_shot = true
+
+[connection signal="timeout" from="PointingTimer" to="." method="changing_pointing_state" binds= [false]]
