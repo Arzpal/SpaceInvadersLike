@@ -22,7 +22,8 @@ var both_pressed = false
 @onready var shooting = $Shooting
 var is_targeting = false
 
-var smooth_mouse_pos: Vector2
+#charging shoot
+
 
 #damage
 @onready var ship_sprite = $ShipSprite
@@ -53,9 +54,6 @@ func movement_rotation(delta):
 	
 	#executing movement if new direction and if not targeting
 	if direction != Vector2.ZERO && !is_targeting:
-		var extra_dir: Vector2
-		if sign(direction.x) != sign(velocity.x): extra_dir.x = direction.x * 3
-		if sign(direction.y) != sign(velocity.y): extra_dir.y = direction.y * 3
 		velocity += last_direction * moving_speed * DELTA_SPEED * delta
 		is_moving = true
 		if !fire.is_playing():
@@ -112,6 +110,7 @@ func on_shooting_rotation():
 	var direction = (get_global_mouse_position() - global_position).normalized()
 	var godot_adjusted_dir = Vector2(-direction.y, direction.x)
 	look_at(global_position + godot_adjusted_dir)
+	shooting.play("Charge1")
 
 #play shooting animation, throws the bullet and provides it with the direction to go
 func shoot():
@@ -121,7 +120,7 @@ func shoot():
 	var bullet2 = bullet_scene.instantiate() 
 	
 	if shooting.is_playing(): shooting.stop()
-	shooting.play("Fire")
+	shooting.play("Fire1")
 	
 	assign_bullet_properties(bullet1, bullet_position1)
 	assign_bullet_properties(bullet2, bullet_position2)

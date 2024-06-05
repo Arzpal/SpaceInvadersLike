@@ -116,11 +116,10 @@ animations = [{
 "speed": 18.0
 }]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_i2x7p"]
-radius = 3.0
-height = 14.0
+[sub_resource type="CircleShape2D" id="CircleShape2D_ho0ao"]
+radius = 7.0
 
-[node name="bullet" type="RigidBody2D"]
+[node name="ray_bullet" type="RigidBody2D"]
 top_level = true
 z_index = 9
 collision_layer = 16
@@ -133,16 +132,13 @@ timer_delay = 0.75
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 self_modulate = Color(1.5, 1.5, 1.5, 1)
 sprite_frames = SubResource("SpriteFrames_0boc4")
-animation = &"Idle"
+animation = &"Explosion"
 autoplay = "Idle"
 
 [node name="Hitbox" type="CollisionShape2D" parent="."]
-shape = SubResource("CapsuleShape2D_i2x7p")
+shape = SubResource("CircleShape2D_ho0ao")
 script = ExtResource("3_80p1k")
 damage = 10
 
 [node name="Timer" type="Timer" parent="."]
 one_shot = true
-
-[connection signal="impact" from="Hitbox" to="." method="on_hitbox_impact"]
-[connection signal="timeout" from="Timer" to="." method="on_hitbox_impact"]
