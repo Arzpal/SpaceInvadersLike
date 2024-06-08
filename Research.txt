@@ -1,0 +1,10 @@
+3 Tipos de Enemigos:
+-A melee
+-A rango
+-Explosivos
+Diferentes recompensas/
+mejoras
+Mejorar Partes partículares
+de la nave
+Niveles Procedurales
+Biomas
