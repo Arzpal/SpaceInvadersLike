@@ -29,7 +29,6 @@ func _ready():
 	global_rotation = spawn_rot
 	timer.wait_time = timer_delay
 	timer.start()
-	pass # Replace with function body.
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

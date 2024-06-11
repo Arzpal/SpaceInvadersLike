@@ -16,14 +16,16 @@ var both_pressed = false
 @onready var rot_delay = $RotationDelay
 
 #shoot
-@export var bullet_scene: PackedScene
-@onready var bullet_position1 = $BulletPosition1
-@onready var bullet_position2 = $BulletPosition2
-@onready var shooting = $Shooting
+@export var regular_blt_sc: PackedScene
+@export var charged_blt_sc: PackedScene
+@onready var reg_blt_pos1 = $BulletPosition1
+@onready var reg_blt_pos2 = $BulletPosition2
 var is_targeting = false
 
 #charging shoot
-
+@onready var shooting = $Shooting
+var charging_speed = 0.0
+var charged_limit = 3
 
 #damage
 @onready var ship_sprite = $ShipSprite
@@ -37,7 +39,7 @@ func _physics_process(delta):
 	movement_rotation(delta)
 	
 	if Input.is_action_pressed("shoot") && !is_moving:
-		on_shooting_rotation()
+		on_shooting_rotation(delta)
 	if Input.is_action_just_released("shoot") && !is_moving:
 		shoot()
 
@@ -104,28 +106,47 @@ func _on_rotation_delay_timeout():
 	rot_dir = last_direction
 
 #rotates towards mouse while targeting
-func on_shooting_rotation():
+func on_shooting_rotation(delta):
 	is_targeting = true
 	# Calculate the direction vector from the object to the mouse
-	var direction = (get_global_mouse_position() - global_position).normalized()
-	var godot_adjusted_dir = Vector2(-direction.y, direction.x)
+	var rotation_dir = (get_global_mouse_position() - global_position).normalized()
+	var godot_adjusted_dir = Vector2(-rotation_dir.y, rotation_dir.x)
 	look_at(global_position + godot_adjusted_dir)
-	shooting.play("Charge1")
+	var shoot_anim_name = ""
+	var ship_anim_name = ""
+	if charging_speed < charged_limit:
+		charging_speed += delta
+		shoot_anim_name = "Charge1"
+		if charging_speed < charged_limit / 3: ship_anim_name = "Idle"
+		else: ship_anim_name = "Charging1"
+	else:
+		shoot_anim_name = "Charge2"
+		ship_anim_name = "Charging2"
+	shooting.play(shoot_anim_name)
+	ship_sprite.play(ship_anim_name)
+	
 
 #play shooting animation, throws the bullet and provides it with the direction to go
 func shoot():
 	is_targeting = false
 	
-	var bullet1 = bullet_scene.instantiate()
-	var bullet2 = bullet_scene.instantiate() 
+	if charging_speed < charged_limit:
+		var bullet1 = regular_blt_sc.instantiate()
+		var bullet2 = regular_blt_sc.instantiate() 
+		if shooting.is_playing(): shooting.stop()
+		shooting.play("Fire1")
+		assign_bullet_rot(bullet1, reg_blt_pos1)
+		assign_bullet_rot(bullet2, reg_blt_pos2)
+	else:
+		var charged_bullet = charged_blt_sc.instantiate()
+		if shooting.is_playing(): shooting.stop()
+		shooting.play("Fire2")
+		assign_bullet_rot(charged_bullet, shooting)
 	
-	if shooting.is_playing(): shooting.stop()
-	shooting.play("Fire1")
-	
-	assign_bullet_properties(bullet1, bullet_position1)
-	assign_bullet_properties(bullet2, bullet_position2)
+	charging_speed = 0
+	ship_sprite.play("Idle")
 
-func assign_bullet_properties(bullet, bullet_pos):
+func assign_bullet_rot(bullet, bullet_pos):
 	bullet.spawn_pos = bullet_pos.global_position
 	bullet.spawn_rot = bullet_pos.global_rotation
 	bullet.speed_dir = global_rotation - PI / 2

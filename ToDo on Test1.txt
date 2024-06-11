@@ -7,6 +7,10 @@ Design
 -black holes that moves you
 -objects that you need to shoot at to unlock things
 
+PROGRAMMING ENHANCEMENTS
+-easy way to create different upgrades on bullets
+-optimize HURTBOX HITBOX and DAMAGE scripts using classnames
+
 BUGS
 -cuando está herido no se hace invencible
 -las balas no pegan

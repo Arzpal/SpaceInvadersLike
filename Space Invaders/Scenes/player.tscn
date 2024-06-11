@@ -1,7 +1,8 @@
-[gd_scene load_steps=52 format=3 uid="uid://cs54gtqjl7w04"]
+[gd_scene load_steps=59 format=3 uid="uid://cs54gtqjl7w04"]
 
 [ext_resource type="Script" path="res://Scripts/player.gd" id="1_yhjnc"]
 [ext_resource type="PackedScene" uid="uid://0cpl2rpesd6g" path="res://Scenes/ray_bullet.tscn" id="2_xrqw0"]
+[ext_resource type="PackedScene" uid="uid://daimqttudgmua" path="res://Scenes/charged_bullet.tscn" id="3_a2rjl"]
 [ext_resource type="Texture2D" uid="uid://b7ia83m633ntk" path="res://Sprites/Fire.png" id="3_re7cf"]
 [ext_resource type="Texture2D" uid="uid://csmok7ypomy8t" path="res://Sprites/DeathExplosion.png" id="4_3hf3u"]
 [ext_resource type="Texture2D" uid="uid://bs4ub3djl3pnt" path="res://Sprites/PlayerShip.png" id="5_1skne"]
@@ -59,6 +60,30 @@ region = Rect2(0, 0, 64, 64)
 [sub_resource type="AtlasTexture" id="AtlasTexture_xqtsf"]
 atlas = ExtResource("5_1skne")
 region = Rect2(192, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wresw"]
+atlas = ExtResource("5_1skne")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kxpat"]
+atlas = ExtResource("5_1skne")
+region = Rect2(0, 128, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cj5op"]
+atlas = ExtResource("5_1skne")
+region = Rect2(64, 128, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sajm5"]
+atlas = ExtResource("5_1skne")
+region = Rect2(0, 128, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vyarp"]
+atlas = ExtResource("5_1skne")
+region = Rect2(64, 128, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wcj3o"]
+atlas = ExtResource("5_1skne")
+region = Rect2(128, 128, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_x8m2i"]
 atlas = ExtResource("4_3hf3u")
@@ -166,6 +191,40 @@ animations = [{
 "loop": false,
 "name": &"AfterHurt",
 "speed": 9.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wresw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kxpat")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cj5op")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kxpat")
+}],
+"loop": true,
+"name": &"Charging1",
+"speed": 9.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sajm5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vyarp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wcj3o")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vyarp")
+}],
+"loop": true,
+"name": &"Charging2",
+"speed": 12.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -418,7 +477,8 @@ z_index = 10
 script = ExtResource("1_yhjnc")
 moving_speed = 7.0
 delay_time = 0.1
-bullet_scene = ExtResource("2_xrqw0")
+regular_blt_sc = ExtResource("2_xrqw0")
+charged_blt_sc = ExtResource("3_a2rjl")
 
 [node name="Fire" type="AnimatedSprite2D" parent="."]
 use_parent_material = true
@@ -448,8 +508,6 @@ position = Vector2(0, -6)
 sprite_frames = SubResource("SpriteFrames_1jlni")
 animation = &"Fire2"
 autoplay = "Idle"
-frame = 6
-frame_progress = 1.0
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
 position = Vector2(0, -5)

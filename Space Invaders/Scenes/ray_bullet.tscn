@@ -131,7 +131,7 @@ speed_variable = 6
 timer_delay = 0.75
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-self_modulate = Color(1.5, 1.5, 1.5, 1)
+self_modulate = Color(1.25, 1.25, 1.25, 1)
 sprite_frames = SubResource("SpriteFrames_0boc4")
 animation = &"Idle"
 autoplay = "Idle"
