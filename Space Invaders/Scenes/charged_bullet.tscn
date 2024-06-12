@@ -1,6 +1,6 @@
 [gd_scene load_steps=14 format=3 uid="uid://daimqttudgmua"]
 
-[ext_resource type="Script" path="res://Scripts/bullet.gd" id="1_gwq31"]
+[ext_resource type="Script" path="res://Scripts/charged_bullet.gd" id="1_s6efq"]
 [ext_resource type="Texture2D" uid="uid://cp26tpl7xvuy2" path="res://Sprites/ChargedRay1.png" id="2_0uba7"]
 [ext_resource type="Script" path="res://Scripts/hitbox.gd" id="3_x8mjm"]
 
@@ -85,9 +85,7 @@ z_index = 9
 collision_layer = 16
 collision_mask = 0
 gravity_scale = 0.0
-script = ExtResource("1_gwq31")
-speed_variable = 7
-timer_delay = 2.0
+script = ExtResource("1_s6efq")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_huhiv")

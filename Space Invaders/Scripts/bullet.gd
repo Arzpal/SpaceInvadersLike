@@ -1,4 +1,5 @@
 extends RigidBody2D
+class_name Bullet
 
 const SPEED_DELTA = 10000.0
 @export var speed_variable = 5
