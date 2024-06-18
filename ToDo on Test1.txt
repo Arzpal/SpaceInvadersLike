@@ -9,7 +9,6 @@ Design
 
 PROGRAMMING ENHANCEMENTS
 -easy way to create different upgrades on bullets
--optimize HURTBOX HITBOX and DAMAGE scripts using classnames
 
 BUGS
 -cuando está herido no se hace invencible

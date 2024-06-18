@@ -86,6 +86,8 @@ collision_layer = 16
 collision_mask = 0
 gravity_scale = 0.0
 script = ExtResource("1_s6efq")
+speed_variable = 7
+timer_delay = 2.0
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_huhiv")
