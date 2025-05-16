@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c77npili4pel4"
-path="res://.godot/imported/level_spritesheet.png-26a44dd21a040a5480d5ccba54377d99.ctex"
+uid="uid://dbeeb1nu80v6q"
+path="res://.godot/imported/Space.png-e40c8583358de07e162693ea94c78ede.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://addons/phantom_camera/examples/textures/2D/level_spritesheet.png"
-dest_files=["res://.godot/imported/level_spritesheet.png-26a44dd21a040a5480d5ccba54377d99.ctex"]
+source_file="res://Sprites/Space.png"
+dest_files=["res://.godot/imported/Space.png-e40c8583358de07e162693ea94c78ede.ctex"]
 
 [params]
 

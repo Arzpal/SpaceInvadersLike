@@ -1,13 +1,13 @@
-[gd_scene load_steps=13 format=3 uid="uid://4gbdl7kj0j6r"]
+[gd_scene load_steps=12 format=3 uid="uid://4gbdl7kj0j6r"]
 
 [ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_2d.gd" id="1_2swdw"]
-[ext_resource type="Texture2D" uid="uid://bc58chdg2c13j" path="res://icon.svg" id="1_s84s1"]
 [ext_resource type="Script" path="res://addons/phantom_camera/scripts/resources/tween_resource.gd" id="2_oharn"]
 [ext_resource type="PackedScene" uid="uid://cs54gtqjl7w04" path="res://Scenes/player.tscn" id="3_5jjnk"]
 [ext_resource type="Texture2D" uid="uid://cado1ylq3ul5t" path="res://Sprites/Arcade - Space Invaders - Game Graphics and Color Overlays.png" id="4_ov63s"]
 [ext_resource type="PackedScene" uid="uid://d36cb0xrguemc" path="res://Scenes/asteroid.tscn" id="5_cnk4v"]
 [ext_resource type="PackedScene" uid="uid://dqo5edyq4rl20" path="res://Scenes/player_pointer.tscn" id="5_jlnt7"]
 [ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="6_q84kf"]
+[ext_resource type="Texture2D" uid="uid://dbeeb1nu80v6q" path="res://Sprites/Space.png" id="7_hx303"]
 
 [sub_resource type="Resource" id="Resource_i0hde"]
 script = ExtResource("2_oharn")
@@ -16,9 +16,6 @@ transition = 0
 ease = 2
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1305y"]
-
-[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_o7dpv"]
-blend_mode = 2
 
 [sub_resource type="Environment" id="Environment_le8y8"]
 background_mode = 3
@@ -29,12 +26,6 @@ glow_hdr_scale = 3.25
 glow_hdr_luminance_cap = 14.85
 
 [node name="Playground" type="Node2D"]
-
-[node name="Sprite2D2" type="Sprite2D" parent="."]
-modulate = Color(0.435192, 0.435192, 0.435192, 1)
-position = Vector2(1127, -195)
-scale = Vector2(31.4618, 31.6859)
-texture = ExtResource("1_s84s1")
 
 [node name="PhantomCamera2D" type="Node2D" parent="." node_paths=PackedStringArray("follow_targets")]
 position = Vector2(392, 221.5)
@@ -60,7 +51,7 @@ delay_time = 0.2
 player = NodePath("..")
 
 [node name="Wall" type="StaticBody2D" parent="."]
-position = Vector2(236, 237)
+position = Vector2(506, 429)
 rotation = 0.324459
 scale = Vector2(14.28, 17.44)
 
@@ -68,12 +59,15 @@ scale = Vector2(14.28, 17.44)
 shape = SubResource("RectangleShape2D_1305y")
 
 [node name="Sprite2D" type="Sprite2D" parent="Wall"]
+modulate = Color(0, 0, 0, 1)
 self_modulate = Color(45.946, 45, 45, 1)
 position = Vector2(-7.39098e-06, -8.25524e-06)
 scale = Vector2(0.18018, 0.15625)
 texture = ExtResource("4_ov63s")
 
 [node name="Sprite2D2" type="Sprite2D" parent="Wall"]
+visible = false
+modulate = Color(0, 0, 0, 1)
 self_modulate = Color(45.946, 45, 45, 1)
 position = Vector2(102.462, -14.0622)
 scale = Vector2(0.18018, 0.15625)
@@ -85,12 +79,11 @@ position = Vector2(798, 539)
 [node name="Asteroid2" parent="." instance=ExtResource("5_cnk4v")]
 position = Vector2(831, 498)
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-visible = false
-material = SubResource("CanvasItemMaterial_o7dpv")
-position = Vector2(-1555, 239)
-scale = Vector2(53.5369, 61.9258)
-texture = ExtResource("4_ov63s")
+[node name="Space" type="Sprite2D" parent="."]
+z_index = -35
+position = Vector2(799, 472)
+scale = Vector2(0.65, 0.65)
+texture = ExtResource("7_hx303")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_le8y8")
